@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
+//@ts-ignore
 import { Howl } from "howler";
 import { isMobile } from "react-device-detect";
 
