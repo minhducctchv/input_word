@@ -232,10 +232,10 @@ export default function HomePage() {
       className="flex flex-col items-center w-screen h-screen bg-blue-100"
       onClick={showKeyBoard}
     >
-      <input
-        type="text"
+      <textarea
+        rows={2}
+        cols={16}
         ref={inputRef}
-        lang="en"
         onChange={handleChange}
         className="block md:hidden"
         // style={{ display: "none" }}
