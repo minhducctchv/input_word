@@ -238,10 +238,7 @@ export default function HomePage() {
   return (
     <QueryClientProvider client={queryClient}>
       <WordProvider word={word}>
-        <div
-          className="flex flex-col items-center w-screen min-h-screen bg-blue-100"
-          onClick={showKeyBoard}
-        >
+        <div className="flex flex-col items-center w-screen min-h-screen bg-blue-100">
           <input
             type="text"
             ref={inputRef}
