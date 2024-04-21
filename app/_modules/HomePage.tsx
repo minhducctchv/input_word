@@ -23,6 +23,9 @@ function compareArrays(array1: string[], array2: string[]) {
 export default function HomePage() {
   const searchParams = useSearchParams();
   const word = searchParams.get("word") ?? "";
+  const isMobileParam = searchParams.get("isMobile");
+
+  const isMobileComputed = isMobileParam === "true" || isMobile;
 
   const [suggest, setSuggest] = useState<string[]>([]);
   const [suggestNoSort, setSuggestNoSort] = useState<string[]>([]);
@@ -65,7 +68,7 @@ export default function HomePage() {
   });
 
   useEffect(() => {
-    if (!isMobile) {
+    if (!isMobileComputed) {
       window.addEventListener("keydown", handleKeyDown);
       return () => {
         window.removeEventListener("keydown", handleKeyDown);
@@ -73,7 +76,7 @@ export default function HomePage() {
     } else {
       window.removeEventListener("keydown", handleKeyDown);
     }
-  }, [isMobile]);
+  }, [isMobileComputed]);
 
   useEffect(() => {
     init();
@@ -109,7 +112,7 @@ export default function HomePage() {
   };
 
   const showKeyBoard = () => {
-    if (isMobile) {
+    if (isMobileComputed) {
       setTimeout(() => {
         inputRef.current.focus();
       });
@@ -218,7 +221,7 @@ export default function HomePage() {
   };
 
   const handleChange = (event: any) => {
-    if (isMobile) {
+    if (isMobileComputed) {
       if (event.nativeEvent.inputType === "deleteContentBackward") {
         setKeyDown("Backspace");
       } else {
