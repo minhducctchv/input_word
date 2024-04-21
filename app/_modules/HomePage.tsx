@@ -1,9 +1,12 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 //@ts-ignore
 import { Howl } from "howler";
 import { isMobile } from "react-device-detect";
+import { QueryClient, QueryClientProvider } from "react-query";
+import WordProvider from "./components/WordProvider";
+import Words from "./components/Words";
 
 function compareArrays(array1: string[], array2: string[]) {
   if (array1.length !== array2.length) {
@@ -29,6 +32,8 @@ export default function HomePage() {
   const [keyDownIndex, setKeyDownIndex] = useState(0);
   const [status, setStatus] = useState<"input" | "success" | "error">("input");
   const inputRef = useRef<any>(null);
+
+  const queryClient = new QueryClient();
 
   const success = new Howl({
     src: ["./mp3/success.mp3"],
@@ -228,53 +233,60 @@ export default function HomePage() {
   if (!word?.length) return <>Word not found.</>;
 
   return (
-    <div
-      className="flex flex-col items-center w-screen h-screen bg-blue-100"
-      onClick={showKeyBoard}
-    >
-      <input
-        type="text"
-        ref={inputRef}
-        onChange={handleChange}
-        className="block md:hidden"
-        // style={{ display: "none" }}
-      />
-      <div
-        className="shadow-2xl rounded-lg p-4 flex flex-col gap-2 bg-blue-200
-        mt-[10vh]
+    <QueryClientProvider client={queryClient}>
+      <WordProvider word={word}>
+        <div
+          className="flex flex-col items-center w-screen min-h-screen bg-blue-100"
+          onClick={showKeyBoard}
+        >
+          <input
+            type="text"
+            ref={inputRef}
+            onChange={handleChange}
+            className="block md:hidden"
+            // style={{ display: "none" }}
+          />
+          <div
+            className="shadow-2xl rounded-lg p-4 flex flex-col gap-2 bg-blue-200
+        mt-[10vh] mb-12
       justify-center items-center
       min-w-[300px] max-w-[100%] md:max-w-[88%]"
-      >
-        <div className="flex w-full flex-wrap">
-          {suggest.map((c, index) => (
-            <>
-              <span key={index} className={`text-2xl font-bold m-[2px]`}>
-                {c}
-              </span>
-            </>
-          ))}
-        </div>
-        <div>
-          {result.map((c, index) => (
-            <>
-              <span
-                key={index}
-                className={`text-2xl font-bold  m-[2px] ${handleStatusColor()}`}
-              >
-                {c}
-              </span>
-            </>
-          ))}
-        </div>
-        <div className="my-4">
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            onClick={switchMode}
           >
-            {repeatMode ? "Hard" : "Easy"}
-          </button>
+            <div className="flex w-full flex-wrap">
+              {suggest.map((c, index) => (
+                <>
+                  <span key={index} className={`text-2xl font-bold m-[2px]`}>
+                    {c}
+                  </span>
+                </>
+              ))}
+            </div>
+            <div>
+              {result.map((c, index) => (
+                <>
+                  <span
+                    key={index}
+                    className={`text-2xl font-bold  m-[2px] ${handleStatusColor()}`}
+                  >
+                    {c}
+                  </span>
+                </>
+              ))}
+            </div>
+            <div className="my-4">
+              <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                onClick={switchMode}
+              >
+                {repeatMode ? "Hard" : "Easy"}
+              </button>
+            </div>
+            <div>
+              <Words />
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      </WordProvider>
+    </QueryClientProvider>
   );
 }
