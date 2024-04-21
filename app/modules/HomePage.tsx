@@ -243,7 +243,7 @@ export default function HomePage() {
         className="shadow-2xl rounded-lg p-4 flex flex-col gap-2 bg-blue-200
         mt-[10vh]
       justify-center items-center
-      min-w-[300px] max-w-[88%]"
+      min-w-[300px] max-w-[100%] md:max-w-[88%]"
       >
         <div className="flex w-full flex-wrap">
           {suggest.map((c, index) => (
