@@ -246,8 +246,8 @@ export default function HomePage() {
             type="text"
             ref={inputRef}
             onChange={handleChange}
-            className="block md:hidden"
-            // style={{ display: "none" }}
+            // className="block md:hidden"
+            style={{ display: isMobileComputed ? "block" : "none" }}
           />
           <div
             className="shadow-2xl rounded-lg p-4 flex flex-col gap-2 bg-blue-200
