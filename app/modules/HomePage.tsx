@@ -232,9 +232,8 @@ export default function HomePage() {
       className="flex flex-col items-center w-screen h-screen bg-blue-100"
       onClick={showKeyBoard}
     >
-      <textarea
-        rows={2}
-        cols={16}
+      <input
+        type="text"
         ref={inputRef}
         onChange={handleChange}
         className="block md:hidden"
