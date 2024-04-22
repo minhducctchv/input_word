@@ -40,7 +40,11 @@ export default function Phonetics(props: IProps) {
           </audio>
           <Tag
             color={phonetic.text == rootPhonetic ? "green" : undefined}
-            className="cursor-pointer text-lg"
+            className={`${
+              !phonetic.audio
+                ? "cursor-not-allowed text-gray-400"
+                : "cursor-pointer"
+            } text-lg`}
             icon={<SoundOutlined />}
             onClick={() => togglePlay(index)}
           >

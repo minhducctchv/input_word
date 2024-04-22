@@ -252,7 +252,10 @@ export default function HomePage() {
       justify-center items-center
       min-w-[300px] max-w-[100%] md:max-w-[88%]"
           >
-            <div className="flex w-full flex-wrap">
+            <div
+              className="flex w-full flex-wrap justify-center"
+              onClick={showKeyBoard}
+            >
               {suggest.map((c, index) => (
                 <>
                   <span key={index} className={`text-2xl font-bold m-[2px]`}>
@@ -261,7 +264,7 @@ export default function HomePage() {
                 </>
               ))}
             </div>
-            <div>
+            <div onClick={showKeyBoard}>
               {result.map((c, index) => (
                 <>
                   <span

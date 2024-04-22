@@ -11,7 +11,7 @@ export default function Words() {
 
   const items: any = data.map((_data, index) => ({
     key: index,
-    label: `Word ${index + 1}`,
+    label: <span className="font-medium">{`Word ${index + 1}`}</span>,
     children: <Word wordIndex={index} />,
   }));
 

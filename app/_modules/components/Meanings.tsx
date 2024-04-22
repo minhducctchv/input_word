@@ -18,7 +18,9 @@ export default function Meanings(props: IProps) {
 
   const items: any = meanings.map((meaning, index) => ({
     key: index,
-    label: meaning.partOfSpeech,
+    label: (
+      <span className="font-medium">{meaning.partOfSpeech?.toUpperCase()}</span>
+    ),
     children: <Meaning meaning={meaning} />,
   }));
 
@@ -42,7 +44,7 @@ const Meaning = (props: { meaning: IMeaning }) => {
 
   const items = newDefinitions.map((definition, index) => ({
     key: index,
-    label: definition.definition,
+    label: <span className="font-medium">{definition.definition}</span>,
     children: <p>{definition.example}</p>,
   }));
   return (
